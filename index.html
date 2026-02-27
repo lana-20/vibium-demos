@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibium — Demo Video Series</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181b23;
+    --border: #1f2330;
+    --border2: #2a2f40;
+    --accent: #00e5a0;
+    --accent2: #00b8ff;
+    --accent3: #ff6b35;
+    --text: #e8eaf0;
+    --text2: #8890a8;
+    --text3: #4f566b;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow blobs */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .glow-right {
+    position: fixed;
+    bottom: -100px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,184,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* Header */
+  header {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--border2);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 18px;
+    color: #0a0c10;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .logo-text span {
+    color: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 300;
+    letter-spacing: -1px;
+    color: var(--text);
+    line-height: 1.15;
+    max-width: 600px;
+  }
+
+  h1 strong {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .header-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-green {
+    background: rgba(0,229,160,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,229,160,0.25);
+  }
+
+  .badge-blue {
+    background: rgba(0,184,255,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(0,184,255,0.2);
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .count-text {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text3);
+  }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    background: var(--surface);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    letter-spacing: 0.03em;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0,229,160,0.07);
+  }
+
+  /* Table wrapper */
+  .table-wrap {
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead tr {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border2);
+  }
+
+  th {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    padding: 14px 20px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  th:first-child { width: 52px; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+    animation: rowIn 0.4s ease both;
+  }
+
+  @keyframes rowIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  tbody tr:nth-child(1) { animation-delay: 0.02s; }
+  tbody tr:nth-child(2) { animation-delay: 0.04s; }
+  tbody tr:nth-child(3) { animation-delay: 0.06s; }
+  tbody tr:nth-child(4) { animation-delay: 0.08s; }
+  tbody tr:nth-child(5) { animation-delay: 0.10s; }
+  tbody tr:nth-child(6) { animation-delay: 0.12s; }
+  tbody tr:nth-child(7) { animation-delay: 0.14s; }
+  tbody tr:nth-child(8) { animation-delay: 0.16s; }
+  tbody tr:nth-child(9) { animation-delay: 0.18s; }
+  tbody tr:nth-child(10) { animation-delay: 0.20s; }
+  tbody tr:nth-child(11) { animation-delay: 0.22s; }
+  tbody tr:nth-child(12) { animation-delay: 0.24s; }
+  tbody tr:nth-child(13) { animation-delay: 0.26s; }
+  tbody tr:nth-child(14) { animation-delay: 0.28s; }
+  tbody tr:nth-child(15) { animation-delay: 0.30s; }
+  tbody tr:nth-child(16) { animation-delay: 0.32s; }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+  tbody tr.hidden { display: none; }
+
+  td {
+    padding: 16px 20px;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Num cell */
+  .num {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text3);
+    white-space: nowrap;
+    padding-top: 18px;
+  }
+
+  .num-bonus {
+    color: var(--accent3);
+  }
+
+  /* Title cell */
+  .title-cell strong {
+    font-weight: 500;
+    color: var(--text);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* Type pill */
+  .type-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .type-overview    { background: rgba(0,229,160,0.1);  color: var(--accent);  border: 1px solid rgba(0,229,160,0.2); }
+  .type-beginner    { background: rgba(0,184,255,0.1);  color: var(--accent2); border: 1px solid rgba(0,184,255,0.2); }
+  .type-advanced    { background: rgba(255,107,53,0.1); color: var(--accent3); border: 1px solid rgba(255,107,53,0.2); }
+  .type-agent       { background: rgba(168,85,247,0.1); color: #c084fc;        border: 1px solid rgba(168,85,247,0.2); }
+  .type-feature     { background: rgba(250,204,21,0.1); color: #fbbf24;        border: 1px solid rgba(250,204,21,0.2); }
+  .type-explainer   { background: rgba(52,211,153,0.1); color: #6ee7b7;        border: 1px solid rgba(52,211,153,0.2); }
+  .type-reference   { background: rgba(148,163,184,0.1);color: #94a3b8;        border: 1px solid rgba(148,163,184,0.2); }
+  .type-interview   { background: rgba(251,113,133,0.1);color: #fda4af;        border: 1px solid rgba(251,113,133,0.2); }
+
+  /* Links */
+  .links-cell { min-width: 180px; }
+
+  .link-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent2);
+    text-decoration: none;
+    padding: 3px 8px;
+    border: 1px solid rgba(0,184,255,0.2);
+    background: rgba(0,184,255,0.05);
+    border-radius: 3px;
+    margin: 2px 2px 2px 0;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .link-item:hover {
+    background: rgba(0,184,255,0.12);
+    border-color: rgba(0,184,255,0.5);
+    color: #fff;
+  }
+
+  .link-item svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .no-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    font-style: italic;
+  }
+
+  /* Notes */
+  .notes-cell {
+    font-size: 12px;
+    color: var(--text2);
+    min-width: 140px;
+  }
+
+  .notes-cell:empty::before,
+  .notes-cell.empty::before {
+    content: '—';
+    color: var(--text3);
+  }
+
+  /* Bonus row highlight */
+  tr.bonus-row td {
+    background: rgba(255,107,53,0.03);
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+  }
+
+  footer a {
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  footer a:hover { color: var(--accent); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .container { padding: 0 16px 60px; }
+    header { padding: 40px 0 32px; }
+    h1 { font-size: 24px; }
+    td, th { padding: 12px 14px; }
+    .links-cell { min-width: 120px; }
+  }
+
+  @media (max-width: 640px) {
+    .col-notes { display: none; }
+    .header-meta { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="glow-right"></div>
+
+<div class="container">
+
+  <header>
+    <div>
+      <div class="logo-row">
+        <div class="logo-icon">V/</div>
+        <span class="logo-text">Vibium<span>.</span></span>
+      </div>
+      <h1><strong>Demo Video Series</strong><br>Social Media Distribution Plan</h1>
+    </div>
+    <div class="header-meta">
+      <span class="badge badge-green">Social Distribution</span>
+      <span class="badge badge-blue">15 Videos Planned</span>
+      <span class="count-text">vibiumdev.github.io/vibium</span>
+    </div>
+  </header>
+
+  <div class="filters">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="overview">Overview</button>
+    <button class="filter-btn" data-filter="beginner">Beginner</button>
+    <button class="filter-btn" data-filter="advanced">Advanced</button>
+    <button class="filter-btn" data-filter="agent">Agent</button>
+    <button class="filter-btn" data-filter="feature">Feature</button>
+    <button class="filter-btn" data-filter="reference">Reference</button>
+    <button class="filter-btn" data-filter="interview">Interview</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Video Title</th>
+          <th>Type / Level</th>
+          <th>Reference Links</th>
+          <th class="col-notes">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr data-type="overview">
+          <td class="num">01</td>
+          <td class="title-cell"><strong>Intro to Vibium – What is it? Why Vibium?</strong></td>
+          <td><span class="type-pill type-overview">Overview</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              GitHub Repo
+            </a>
+            <a href="https://gemini.google.com/app/56d33695306db88a" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Gemini
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="beginner">
+          <td class="num">02</td>
+          <td class="title-cell"><strong>Getting Started – JavaScript / TypeScript API</strong></td>
+          <td><span class="type-pill type-beginner">Beginner</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-js.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              JS Tutorial
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="beginner">
+          <td class="num">03</td>
+          <td class="title-cell"><strong>Getting Started – Python API</strong></td>
+          <td><span class="type-pill type-beginner">Beginner</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-python.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Python Tutorial
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="advanced">
+          <td class="num">03b</td>
+          <td class="title-cell"><strong>Getting Started – MCP – Claude Code</strong></td>
+          <td><span class="type-pill type-advanced">Advanced</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-mcp.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              MCP Tutorial
+            </a>
+          </td>
+          <td class="notes-cell col-notes">Paired with #3 in source</td>
+        </tr>
+
+        <tr data-type="advanced">
+          <td class="num">04</td>
+          <td class="title-cell"><strong>Getting Started – MCP – Gemini CLI</strong></td>
+          <td><span class="type-pill type-advanced">Advanced</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-mcp.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              MCP Tutorial
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="agent">
+          <td class="num">05</td>
+          <td class="title-cell"><strong>Agent Setup – Vibium Skill Overview – Automate Browser with CLI/TUI</strong></td>
+          <td><span class="type-pill type-agent">Agent Setup</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/tree/main?tab=readme-ov-file#agent-setup" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              README
+            </a>
+            <a href="https://github.com/VibiumDev/vibium/blob/main/skills/vibe-check/SKILL.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              SKILL.md
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="agent">
+          <td class="num">06</td>
+          <td class="title-cell"><strong>Vibium Agent Skill – Main CLI Commands</strong></td>
+          <td><span class="type-pill type-agent">Agent Skill</span></td>
+          <td class="links-cell"><span class="no-link">No ref link yet</span></td>
+          <td class="notes-cell col-notes"></td>
+        </tr>
+
+        <tr data-type="agent">
+          <td class="num">07</td>
+          <td class="title-cell"><strong>Vibium Agent Skill Continued – DOM Query &amp; Mutation with JS Eval, Tips, Etc.</strong></td>
+          <td><span class="type-pill type-agent">Agent Skill</span></td>
+          <td class="links-cell"><span class="no-link">No ref link yet</span></td>
+          <td class="notes-cell col-notes"></td>
+        </tr>
+
+        <tr data-type="feature">
+          <td class="num">08</td>
+          <td class="title-cell"><strong>Vibium Tracer – Browser Session Tracing and Viewing</strong></td>
+          <td><span class="type-pill type-feature">Feature</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/tracing.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Tracing Tutorial
+            </a>
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/explanation/trace-format.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Trace Format
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="reference">
+          <td class="num">09</td>
+          <td class="title-cell"><strong>WebDriver BiDi – The Standard Behind Vibium</strong></td>
+          <td><span class="type-pill type-explainer">Explainer</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/webdriver-bidi-raw.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              BiDi Tutorial
+            </a>
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/explanation/webdriver-bidi.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Explanation
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="feature">
+          <td class="num">10</td>
+          <td class="title-cell"><strong>Accessibility Tree – Inspect Page a11y Tree in JS &amp; Python</strong></td>
+          <td><span class="type-pill type-feature">Feature</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/a11y-tree-js.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              JS Tutorial
+            </a>
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/a11y-tree-python.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Python Tutorial
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="feature">
+          <td class="num">11</td>
+          <td class="title-cell"><strong>Browser Window and Viewport Control with Vibium</strong></td>
+          <td><span class="type-pill type-feature">Feature</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/window-and-viewport.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Tutorial
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="feature">
+          <td class="num">12</td>
+          <td class="title-cell"><strong>Detect and Save Browser Downloads with Vibium</strong></td>
+          <td><span class="type-pill type-feature">Feature</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/downloads-python.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Python Tutorial
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="reference">
+          <td class="num">13</td>
+          <td class="title-cell"><strong>Test Automation Tool Comparison – Vibium Parity with Playwright &amp; Selenium WebDriver</strong></td>
+          <td><span class="type-pill type-reference">Reference</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/reference/vibium-doc1-playwright-parity.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Playwright Parity
+            </a>
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/reference/vibium-doc2-webdriver-parity.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              WebDriver Parity
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="reference">
+          <td class="num">14</td>
+          <td class="title-cell"><strong>Legacy Test Suite Transition – Vibium Selenium Compatibility Layer</strong></td>
+          <td><span class="type-pill type-reference">Reference</span></td>
+          <td class="links-cell">
+            <a href="https://github.com/VibiumDev/vibium/blob/main/docs/reference/vibium-doc3-selenium-compat.md" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Selenium Compat
+            </a>
+          </td>
+          <td class="notes-cell empty col-notes"></td>
+        </tr>
+
+        <tr data-type="interview" class="bonus-row">
+          <td class="num num-bonus">✦</td>
+          <td class="title-cell"><strong>Vibium Prompted &amp; Unfiltered: Jason Huggins Answers the Web's Most Searched Questions</strong></td>
+          <td><span class="type-pill type-interview">Interview</span></td>
+          <td class="links-cell">
+            <a href="https://www.youtube.com/@LanaBegunova" class="link-item" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              YouTube Ref TBA
+            </a>
+          </td>
+          <td class="notes-cell col-notes">Wired-style autocomplete interview. Lana hosts. Internet's most burning questions.</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>Vibium Demo Video Series &mdash; Social Media Distribution Plan</p>
+    <p><a href="https://github.com/VibiumDev/vibium" target="_blank" rel="noopener">github.com/VibiumDev/vibium</a></p>
+  </footer>
+
+</div>
+
+<script>
+  const btns = document.querySelectorAll('.filter-btn');
+  const rows = document.querySelectorAll('#main-table tbody tr');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      rows.forEach(row => {
+        if (f === 'all' || row.dataset.type === f) {
+          row.classList.remove('hidden');
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
