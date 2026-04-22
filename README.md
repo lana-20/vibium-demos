@@ -45,7 +45,7 @@ Whether you're a QA engineer modernizing your stack, a developer adding browser 
 | 06 | Agent Setup — Vibium Skill Overview — Automate Browser with CLI/TUI | Agent |
 | 07 | Vibium Agent Skill — Main CLI Commands | Agent |
 | 08 | Vibium Agent Skill Continued — DOM Query & Mutation with JS Eval | Agent |
-| 09 | Vibium Tracer — Browser Session Tracing and Viewing | Feature |
+| 09 | Vibium Record Player — Browser Session Tracing and Viewing | Feature |
 | 10 | WebDriver BiDi — The Standard Behind Vibium | Explainer |
 | 11 | Accessibility Tree — Inspect Page a11y Tree in JS & Python | Feature |
 | 12 | Browser Window and Viewport Control | Feature |
@@ -72,7 +72,7 @@ vibium-demos/
 │   ├── 06-agent-setup/
 │   ├── 07-cli-commands/
 │   ├── 08-dom-query-mutation/
-│   ├── 09-tracer/
+│   ├── 09-record-player/
 │   ├── 10-webdriver-bidi/
 │   ├── 11-a11y-tree/
 │   ├── 12-window-viewport/
@@ -148,7 +148,7 @@ Jump to Episodes 14–15 for the parity and migration guides, then explore the a
 Episodes 04–08 are your fast track: MCP setup, the vibe-check CLI skill, DOM manipulation, and agent patterns.
 
 **Curious about the internals?**
-Episode 10 (WebDriver BiDi) and Episode 09 (Tracer) give you the protocol-level understanding that makes everything else click.
+Episode 10 (WebDriver BiDi) and Episode 09 (Record Player) give you the protocol-level understanding that makes everything else click.
 
 ---
 
