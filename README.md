@@ -4,7 +4,7 @@
 
 [![YouTube](https://img.shields.io/badge/YouTube-@LanaBegunova-red?style=flat&logo=youtube)](https://www.youtube.com/@LanaBegunova)
 [![Vibium](https://img.shields.io/badge/Framework-Vibium-00e5a0?style=flat)](https://github.com/VibiumDev/vibium)
-[![Videos](https://img.shields.io/badge/Videos-16%20planned-orange?style=flat&logo=video)](https://lana-20.github.io/vibium-demos/)
+[![Videos](https://img.shields.io/badge/Videos-16+%20planned-orange?style=flat&logo=video)](https://lana-20.github.io/vibium-demos/)
 
 ---
 
@@ -16,7 +16,7 @@ The answer is a single `~10MB` binary that:
 
 - Gives **AI agents a browser** via a built-in MCP server (no wrappers, no glue code)
 - Speaks **WebDriver BiDi** — the modern bidirectional WebSocket protocol, not legacy HTTP REST
-- Works as a **CLI skill, MCP server, or JS/Python library** — your choice
+- Works as a **CLI skill, MCP server, or JS/Java/Python library** — your choice
 - Installs in seconds: `npm install vibium` or `pip install vibium`
 
 If Selenium was built for the web era and Appium for mobile, **Vibium is built for the AI era**.
@@ -39,19 +39,20 @@ Whether you're a QA engineer modernizing your stack, a developer adding browser 
 |---|-------|-------|
 | 01 | Intro to Vibium — What is it? Why Vibium? | Overview |
 | 02 | Getting Started — JavaScript / TypeScript API | Beginner |
-| 03 | Getting Started — Python API | Beginner |
-| 04 | Getting Started — MCP — Claude Code | Advanced |
-| 05 | Getting Started — MCP — Gemini CLI | Advanced |
-| 06 | Agent Setup — Vibium Skill Overview — Automate Browser with CLI/TUI | Agent |
-| 07 | Vibium Agent Skill — Main CLI Commands | Agent |
-| 08 | Vibium Agent Skill Continued — DOM Query & Mutation with JS Eval | Agent |
-| 09 | Vibium Record Player — Browser Session Tracing and Viewing | Feature |
-| 10 | WebDriver BiDi — The Standard Behind Vibium | Explainer |
-| 11 | Accessibility Tree — Inspect Page a11y Tree in JS & Python | Feature |
-| 12 | Browser Window and Viewport Control | Feature |
-| 13 | Detect and Save Browser Downloads | Feature |
-| 14 | Test Automation Tool Comparison — Parity with Playwright & Selenium | Reference |
-| 15 | Legacy Test Suite Transition — Selenium Compatibility Layer | Reference |
+| 03 | Getting Started — Java API | Beginner |
+| 04 | Getting Started — Python API | Beginner |
+| 05 | Getting Started — MCP — Claude Code | Advanced |
+| 06 | Getting Started — MCP — Gemini CLI | Advanced |
+| 07 | Agent Setup — Vibium Skill Overview — Automate Browser with CLI/TUI | Agent |
+| 08 | Vibium Agent Skill — Main CLI Commands | Agent |
+| 09 | Vibium Agent Skill Continued — DOM Query & Mutation with JS Eval | Agent |
+| 10 | Vibium Record Player — Browser Session Tracing and Viewing | Feature |
+| 11 | WebDriver BiDi — The Standard Behind Vibium | Explainer |
+| 12 | Accessibility Tree — Inspect Page a11y Tree in JS & Python | Feature |
+| 13 | Browser Window and Viewport Control | Feature |
+| 14 | Detect and Save Browser Downloads | Feature |
+| 15 | Test Automation Tool Comparison — Parity with Playwright & Selenium | Reference |
+| 16 | Legacy Test Suite Transition — Selenium Compatibility Layer | Reference |
 | + | Vibium Prompted & Unfiltered: Jason Huggins Answers the Web's Questions | Interview |
 
 📋 **[View the full interactive series index →](https://lana-20.github.io/vibium-demos/)**
@@ -66,19 +67,20 @@ vibium-demos/
 ├── demos/
 │   ├── 01-intro/
 │   ├── 02-getting-started-js/
-│   ├── 03-getting-started-python/
-│   ├── 04-mcp-claude-code/
-│   ├── 05-mcp-gemini-cli/
-│   ├── 06-agent-setup/
-│   ├── 07-cli-commands/
-│   ├── 08-dom-query-mutation/
-│   ├── 09-record-player/
-│   ├── 10-webdriver-bidi/
-│   ├── 11-a11y-tree/
-│   ├── 12-window-viewport/
-│   ├── 13-downloads/
-│   ├── 14-playwright-selenium-parity/
-│   └── 15-selenium-compat/
+│   ├── 03-getting-started-java/
+│   ├── 04-getting-started-python/
+│   ├── 05-mcp-claude-code/
+│   ├── 06-mcp-gemini-cli/
+│   ├── 07-agent-setup/
+│   ├── 08-cli-commands/
+│   ├── 09-dom-query-mutation/
+│   ├── 10-record-player/
+│   ├── 11-webdriver-bidi/
+│   ├── 12-a11y-tree/
+│   ├── 13-window-viewport/
+│   ├── 14-downloads/
+│   ├── 15-playwright-selenium-parity/
+│   └── 16-selenium-compat/
 └── README.md
 ```
 
@@ -93,6 +95,9 @@ Each `demos/` folder contains runnable code that mirrors the corresponding video
 ```bash
 # JavaScript / TypeScript
 npm install vibium
+
+# Java
+TBA
 
 # Python
 pip install vibium
@@ -109,6 +114,8 @@ const title = vibe.eval('document.title')
 console.log(title)
 vibe.quit()
 ```
+### Hello World (Java)
+TBA
 
 ### Hello World (Python)
 
@@ -139,16 +146,16 @@ gemini mcp add vibium npx -y vibium mcp
 ## 🧭 Learning Path
 
 **New to browser automation?**
-Start at Episode 01 → 02 → 03. Build the mental model before touching MCP.
+Start at Episode 01 → 02 → 03 → 04. Build the mental model before touching MCP.
 
 **Experienced with Selenium or Playwright?**
-Jump to Episodes 14–15 for the parity and migration guides, then explore the agent-native features.
+Jump to Episodes 15–16 for the parity and migration guides, then explore the agent-native features.
 
 **Building AI agents?**
-Episodes 04–08 are your fast track: MCP setup, the vibe-check CLI skill, DOM manipulation, and agent patterns.
+Episodes 05–09 are your fast track: MCP setup, the vibe-check CLI skill, DOM manipulation, and agent patterns.
 
 **Curious about the internals?**
-Episode 10 (WebDriver BiDi) and Episode 09 (Record Player) give you the protocol-level understanding that makes everything else click.
+Episode 11 (WebDriver BiDi) and Episode 10 (Record Player) give you the protocol-level understanding that makes everything else click.
 
 ---
 
@@ -160,6 +167,7 @@ Episode 10 (WebDriver BiDi) and Episode 09 (Record Player) give you the protocol
 | npm package | [npmjs.com/package/vibium](https://www.npmjs.com/package/vibium) |
 | PyPI package | [pypi.org/project/vibium](https://pypi.org/project/vibium/) |
 | Getting Started (JS) | [docs/tutorials/getting-started-js.md](https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-js.md) |
+| Getting Started (Java) | [docs/tutorials/getting-started-java.md] (https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-js.md) |
 | Getting Started (Python) | [docs/tutorials/getting-started-python.md](https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-python.md) |
 | MCP Setup Guide | [docs/tutorials/getting-started-mcp.md](https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-mcp.md) |
 | WebDriver BiDi Explainer | [docs/explanation/webdriver-bidi.md](https://github.com/VibiumDev/vibium/blob/main/docs/explanation/webdriver-bidi.md) |
