@@ -167,7 +167,7 @@ Episode 11 (WebDriver BiDi) and Episode 10 (Record Player) give you the protocol
 | npm package | [npmjs.com/package/vibium](https://www.npmjs.com/package/vibium) |
 | PyPI package | [pypi.org/project/vibium](https://pypi.org/project/vibium/) |
 | Getting Started (JS) | [docs/tutorials/getting-started-js.md](https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-js.md) |
-| Getting Started (Java) | [docs/tutorials/getting-started-java.md] (https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-js.md) |
+| Getting Started (Java) | [docs/tutorials/getting-started-java.md](https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-java.md) |
 | Getting Started (Python) | [docs/tutorials/getting-started-python.md](https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-python.md) |
 | MCP Setup Guide | [docs/tutorials/getting-started-mcp.md](https://github.com/VibiumDev/vibium/blob/main/docs/tutorials/getting-started-mcp.md) |
 | WebDriver BiDi Explainer | [docs/explanation/webdriver-bidi.md](https://github.com/VibiumDev/vibium/blob/main/docs/explanation/webdriver-bidi.md) |
